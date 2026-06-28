@@ -1,0 +1,27 @@
+CREATE TABLE IF NOT EXISTS bookings
+(
+    id                  INT            NOT NULL AUTO_INCREMENT,
+    version             INT            NOT NULL DEFAULT 0,
+    booking_code        VARCHAR(50)    NOT NULL,
+    customer_id         INT            NOT NULL,
+    provider_id         INT            NOT NULL,
+    slot_id             INT            NOT NULL,
+    booking_status_id   INT            NOT NULL,
+    service_description VARCHAR(500)   NULL,
+    customer_address    VARCHAR(255)   NULL,
+    total_amount        DECIMAL(10, 2) NULL,
+    is_active           BOOLEAN        NOT NULL DEFAULT TRUE,
+    is_deleted          BOOLEAN        NOT NULL DEFAULT FALSE,
+    created_by          INT            NULL,
+    updated_by          INT            NULL,
+    deleted_by          INT            NULL,
+    created_at          TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at          TIMESTAMP      NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_booking_code (booking_code),
+    CONSTRAINT fk_booking_customer FOREIGN KEY (customer_id) REFERENCES users (id),
+    CONSTRAINT fk_booking_provider FOREIGN KEY (provider_id) REFERENCES service_providers (id),
+    CONSTRAINT fk_booking_slot FOREIGN KEY (slot_id) REFERENCES availability_slots (id),
+    CONSTRAINT fk_booking_status FOREIGN KEY (booking_status_id) REFERENCES status (id)
+);

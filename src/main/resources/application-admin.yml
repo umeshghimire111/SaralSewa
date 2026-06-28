@@ -1,0 +1,32 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/job_finder_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    show-sql: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 9090
+
+jwt:
+  secret: DDFBMSDKcdvmm24302SMDVMFE24DGTIHI240RGKMOFRTHKORG$B*/9%$**@==+=
+
+logging:
+  pattern:
+    console: "%clr(%6p) [ Saral sewa ]%clr(%m){ Green }%n"
+  level:
+    root: INFO
+    com.jobportal: DEBUG
+    org.hibernate: ERROR
+    tomcat: WARN
