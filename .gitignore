@@ -47,3 +47,4 @@ src/main/java/com/SaralSewa/SaralSewa/Admin/AdminInitializer.java
 **/application-local.yml
 *.env
 *.env.*
+**/01-insert-into-application_config
