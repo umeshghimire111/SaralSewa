@@ -37,3 +37,13 @@ build/
 **/admin/
 **/AdminInitializer.java
 src/main/java/com/SaralSewa/SaralSewa/Admin/AdminInitializer.java
+
+# 🔐 SECURE - Sensitive Configuration Files
+**/application-*.yml
+**/application-*.yaml
+**/application-*.properties
+**/application-dev.yml
+**/application-prod.yml
+**/application-local.yml
+*.env
+*.env.*
