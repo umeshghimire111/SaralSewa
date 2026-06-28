@@ -1,0 +1,3 @@
+
+org.springframework.boot.EnvironmentPostProcessor= \
+   com.SaralSewa.SaralSewa.shared.processor.CustomEnvPropertiesPostProcessor

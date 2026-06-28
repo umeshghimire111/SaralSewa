@@ -1,0 +1,13 @@
+-- liquibase formatted
+-- changeset umeshghimire:01
+-- preconditions onFail:CONTINUE ONERROR:HALT
+-- precondition-sql-check expectedResult:0 SELECT COUNT(*) from application_config
+
+INSERT INTO application_config (`key`, `value`)
+VALUES ("mail.username", "umeshghimire443@gmail.com"),
+       ("mail.password", "iaoo etdu cczb qmwj"),
+       ("mail.host", "smtp.gmail.com"),
+       ("mail.port", "587"),
+       ("origin", "http://localhost:5173"),
+       ("file.base-path", "D://workFileUpload/");
+
