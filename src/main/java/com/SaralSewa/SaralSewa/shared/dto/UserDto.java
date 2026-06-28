@@ -44,6 +44,10 @@ public class UserDto {
 
     private String profileImage;
 
+    @NotBlank(message = "Role is required")
+    @Pattern(regexp = "^(CUSTOMER|PROVIDER)$", message = "Role must be CUSTOMER or PROVIDER")
+    private String role;
+
     @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
 

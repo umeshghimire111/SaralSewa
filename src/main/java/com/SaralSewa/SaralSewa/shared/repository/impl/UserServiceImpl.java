@@ -42,10 +42,21 @@ public class UserServiceImpl implements UserService {
         if (defaultStatus == null) {
             return ResponseUtil.getFailureResponse("Default status not found");
         }
+        Role selectedRole;
 
-        Role defaultRole = roleRepository.findByName(RoleConstant.CUSTOMER.getName());
-        if (defaultRole == null) {
-            return ResponseUtil.getFailureResponse("Default role not found");
+        if ("PROVIDER".equalsIgnoreCase(userDto.getRole())) {
+            selectedRole = roleRepository.findByName(RoleConstant.PROVIDER.getName());
+            if (selectedRole == null) {
+                return ResponseUtil.getFailureResponse("Provider role not found");
+            }
+            log.info("User selected PROVIDER role");
+        } else {
+
+            selectedRole = roleRepository.findByName(RoleConstant.CUSTOMER.getName());
+            if (selectedRole == null) {
+                return ResponseUtil.getFailureResponse("Customer role not found");
+            }
+            log.info("User selected CUSTOMER role");
         }
 
         User user = new User();
@@ -56,7 +67,7 @@ public class UserServiceImpl implements UserService {
         user.setPhone(userDto.getPhone());
         user.setAddress(userDto.getAddress());
         user.setProfileImage(userDto.getProfileImage());
-        user.setRole(defaultRole);
+        user.setRole(selectedRole);
         user.setStatus(defaultStatus);
         user.setWrongPasswordAttemptCount(0);
         user.setIsActive(true);
@@ -67,6 +78,6 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
-        return ResponseUtil.getSuccessfulApiResponse("User registered successfully");
+        return ResponseUtil.getSuccessfulApiResponse("User registered successfully as: "+userDto.getRole());
     }
 }

@@ -11,10 +11,15 @@ CREATE TABLE IF NOT EXISTS approval_status
     code        VARCHAR(50)  NOT NULL UNIQUE,
     description VARCHAR(255) NULL,
     is_default  BOOLEAN      NOT NULL DEFAULT FALSE,
-    is_active   BOOLEAN      NOT NULL DEFAULT TRUE,
-    is_deleted  BOOLEAN      NOT NULL DEFAULT FALSE,
-    created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    is_active           BOOLEAN        NOT NULL DEFAULT TRUE,
+    is_deleted          BOOLEAN        NOT NULL DEFAULT FALSE,
+    created_by          INT            NULL,
+    updated_by          INT            NULL,
+    deleted_by          INT            NULL,
+    created_at          TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at          TIMESTAMP      NULL,
     PRIMARY KEY (id),
     UNIQUE KEY uk_approval_status_code (code)
 );
+
