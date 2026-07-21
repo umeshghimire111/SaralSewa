@@ -5,9 +5,9 @@ public class ApiConstant {
 
     public static final String API = "/api/v1";
     public static final String SLASH = "/";
+    public static final String AUTH = "auth";
 
-
-    public static final String AUTH = "admin";
+    public static final String ADMIN = "admin";
     public static final String USERS = "users";
 
     public static final String LOGIN = "login";

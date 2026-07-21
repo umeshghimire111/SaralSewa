@@ -37,6 +37,10 @@ public class JwtFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException
     {
 
+        if (isPublicUrl(request.getRequestURI())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         if (isPrivateUrl(request.getRequestURI())) {
             String token = null;
             String email = null;

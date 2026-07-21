@@ -3,6 +3,7 @@ package com.SaralSewa.SaralSewa.shared.core.security;
 
 import com.SaralSewa.SaralSewa.shared.core.config.CorsConfig;
 import com.SaralSewa.SaralSewa.shared.core.config.constant.PrivateUrls;
+import com.SaralSewa.SaralSewa.shared.core.config.constant.PublicUrls;
 import com.SaralSewa.SaralSewa.shared.exception.CustomAccessDeniedHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -39,6 +40,7 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(corsConfig.corsConfigurationSource()))
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers(PublicUrls.PUBLIC_URLS).permitAll()
                         .requestMatchers(PrivateUrls.PRIVATE_URLS)
                         .authenticated()
                         .anyRequest()

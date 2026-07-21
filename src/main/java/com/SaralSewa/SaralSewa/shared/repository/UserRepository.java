@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface  UserRepository extends JpaRepository<User, Integer> {
 
     User findByEmail(String email);
 
     boolean existsByEmail(String email);
+    User findByUserId(Integer id);
 
     @Modifying
     @Query("UPDATE User u SET u.lastLoggedInTime = :time WHERE u.email = :email")
