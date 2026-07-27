@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateAvailabilitySlotRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateAvailabilitySlotRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListAvailabilitySlotResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewAvailabilitySlotResponse;
 import com.SaralSewa.SaralSewa.shared.entity.AvailabilitySlot;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceProvider;
 import com.SaralSewa.SaralSewa.shared.repository.ServiceProviderRepository;
@@ -26,7 +27,7 @@ public abstract class AvailabilitySlotMapper {
         if (slot == null) return null;
 
         ViewAvailabilitySlotResponse response = new ViewAvailabilitySlotResponse();
-        response.setProviderId(Long.valueOf(slot.getProvider() != null ? slot.getProvider().getId() : null));
+        response.setProviderId((slot.getProvider() != null ? slot.getProvider().getId() : null));
         response.setProviderName(slot.getProvider() != null ? slot.getProvider().getProfession() : null);
         response.setProviderProfession(slot.getProvider() != null ? slot.getProvider().getProfession() : null);
         response.setAvailableDate(slot.getAvailableDate());
@@ -50,7 +51,7 @@ public abstract class AvailabilitySlotMapper {
     public AvailabilitySlot create(CreateAvailabilitySlotRequest request) {
         if (request == null) return null;
 
-        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId());
+        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId()).orElse(null);
 
         AvailabilitySlot slot = new AvailabilitySlot();
         slot.setProvider(provider);

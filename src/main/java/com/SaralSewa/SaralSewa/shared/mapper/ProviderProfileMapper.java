@@ -1,9 +1,8 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
-
-import com.SaralSewa.SaralSewa.shared.dto.request.ProviderProfileRequest;
-import com.SaralSewa.SaralSewa.shared.dto.response.list.ListProviderProfileResponse;
+import com.SaralSewa.SaralSewa.shared.dto.request.action.provider.ProviderProfileRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewProviderProfileResponse;
+import com.SaralSewa.SaralSewa.shared.dto.response.list.ListProviderProfileResponse;
 import com.SaralSewa.SaralSewa.shared.entity.ProviderProfile;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceProvider;
 import com.SaralSewa.SaralSewa.shared.repository.ServiceProviderRepository;
@@ -26,7 +25,7 @@ public abstract class ProviderProfileMapper {
         if (profile == null) return null;
 
         ViewProviderProfileResponse response = new ViewProviderProfileResponse();
-        response.setProviderId(Long.valueOf(profile.getProvider() != null ? profile.getProvider().getId() : null));
+        response.setProviderId(profile.getProvider() != null ? profile.getProvider().getId() : null);
         response.setProviderName(profile.getProvider() != null ? profile.getProvider().getProfession() : null);
         response.setProviderProfession(profile.getProvider() != null ? profile.getProvider().getProfession() : null);
         response.setBio(profile.getBio());
@@ -52,7 +51,9 @@ public abstract class ProviderProfileMapper {
     public ProviderProfile create(ProviderProfileRequest request) {
         if (request == null) return null;
 
-        ServiceProvider provider = serviceProviderRepository.findByUserId(Integer.valueOf(request.getProfileImage()));
+
+        ServiceProvider provider = serviceProviderRepository.findById(request.getProviderId())
+                .orElseThrow(() -> new RuntimeException("Provider not found: " + request.getProviderId()));
 
         ProviderProfile profile = new ProviderProfile();
         profile.setProvider(provider);

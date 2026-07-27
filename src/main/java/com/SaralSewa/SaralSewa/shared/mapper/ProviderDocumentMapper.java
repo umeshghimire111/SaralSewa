@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateProviderDocumentRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateProviderDocumentRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListProviderDocumentResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewProviderDocumentResponse;
 import com.SaralSewa.SaralSewa.shared.entity.ProviderDocument;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceProvider;
 import com.SaralSewa.SaralSewa.shared.repository.ServiceProviderRepository;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
@@ -26,7 +28,7 @@ public abstract class ProviderDocumentMapper {
         if (document == null) return null;
 
         ViewProviderDocumentResponse response = new ViewProviderDocumentResponse();
-        response.setProviderId(Long.valueOf(document.getProvider() != null ? document.getProvider().getId() : null));
+        response.setProviderId((document.getProvider() != null ? document.getProvider().getId() : null));
         response.setProviderName(document.getProvider() != null ? document.getProvider().getProfession() : null);
         response.setDocumentName(document.getDocumentName());
         response.setDocumentType(document.getDocumentType());
@@ -50,7 +52,8 @@ public abstract class ProviderDocumentMapper {
     public ProviderDocument create(CreateProviderDocumentRequest request) {
         if (request == null) return null;
 
-        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId());
+        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId())
+                .orElseThrow(() -> new RuntimeException("Provider not found: " + request.getProviderId()));
 
         ProviderDocument document = new ProviderDocument();
         document.setProvider(provider);

@@ -1,9 +1,9 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewReviewResponse;
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateReviewRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateReviewRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListReviewResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewReviewResponse;
 import com.SaralSewa.SaralSewa.shared.entity.Booking;
 import com.SaralSewa.SaralSewa.shared.entity.Review;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceProvider;
@@ -36,13 +36,13 @@ public abstract class ReviewMapper {
         if (review == null) return null;
 
         ViewReviewResponse response = new ViewReviewResponse();
-        response.setBookingId(Long.valueOf(review.getBooking() != null ? review.getBooking().getId() : null));
+        response.setBookingId(review.getBooking() != null ? review.getBooking().getId() : null);
         response.setBookingCode(review.getBooking() != null ? review.getBooking().getBookingCode() : null);
-        response.setCustomerId(Long.valueOf(review.getCustomer() != null ? review.getCustomer().getId() : null));
+        response.setCustomerId(review.getCustomer() != null ? review.getCustomer().getId() : null);
         response.setCustomerName(review.getCustomer() != null ?
                 review.getCustomer().getFirstName() + (review.getCustomer().getLastName() != null ? " " + review.getCustomer().getLastName() : "") : null);
         response.setCustomerEmail(review.getCustomer() != null ? review.getCustomer().getEmail() : null);
-        response.setProviderId(Long.valueOf(review.getProvider() != null ? review.getProvider().getId() : null));
+        response.setProviderId(review.getProvider() != null ? review.getProvider().getId() : null);
         response.setProviderName(review.getProvider() != null ? review.getProvider().getProfession() : null);
         response.setProviderProfession(review.getProvider() != null ? review.getProvider().getProfession() : null);
         response.setRating(review.getRating());
@@ -66,8 +66,10 @@ public abstract class ReviewMapper {
         if (request == null) return null;
 
         Booking booking = bookingRepository.findById(request.getBookingId()).orElse(null);
-        User customer = userRepository.findByUserId(request.getCustomerId());
-        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId());
+        User customer = userRepository.findById(request.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found: " + request.getCustomerId()));
+        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId())
+                .orElseThrow(() -> new RuntimeException("Provider not found: " + request.getProviderId()));
 
         Review review = new Review();
         review.setBooking(booking);

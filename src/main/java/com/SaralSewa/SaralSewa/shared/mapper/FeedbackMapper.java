@@ -26,7 +26,7 @@ public abstract class FeedbackMapper {
         if (feedback == null) return null;
 
         ViewFeedbackResponse response = new ViewFeedbackResponse();
-        response.setUserId(Long.valueOf(feedback.getUser() != null ? feedback.getUser().getId() : null));
+        response.setUserId((feedback.getUser() != null ? feedback.getUser().getId() : null));
         response.setUserName(feedback.getUser() != null ?
                 feedback.getUser().getFirstName() + (feedback.getUser().getLastName() != null ? " " + feedback.getUser().getLastName() : "") : null);
         response.setUserEmail(feedback.getUser() != null ? feedback.getUser().getEmail() : null);
@@ -50,8 +50,8 @@ public abstract class FeedbackMapper {
     public Feedback create(CreateFeedbackRequest request) {
         if (request == null) return null;
 
-        User user = userRepository.findByUserId(request.getUserId());
-
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found: " + request.getUserId()));
         Feedback feedback = new Feedback();
         feedback.setUser(user);
         feedback.setSubject(request.getSubject());

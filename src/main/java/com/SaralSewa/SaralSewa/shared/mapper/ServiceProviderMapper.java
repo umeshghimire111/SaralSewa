@@ -1,10 +1,11 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.constant.ApprovalStatusConstant;
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateServiceProviderRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateServiceProviderRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListServiceProviderResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewServiceProviderResponse;
 import com.SaralSewa.SaralSewa.shared.entity.ApprovalStatus;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceProvider;
 import com.SaralSewa.SaralSewa.shared.entity.User;
@@ -33,7 +34,7 @@ public abstract class ServiceProviderMapper {
         if (provider == null) return null;
 
         ViewServiceProviderResponse response = new ViewServiceProviderResponse();
-        response.setUserId(Long.valueOf(provider.getUser() != null ? provider.getUser().getId() : null));
+        response.setUserId((provider.getUser() != null ? provider.getUser().getId() : null));
         response.setUserFullName(provider.getUser() != null ?
                 provider.getUser().getFirstName() + (provider.getUser().getLastName() != null ? " " + provider.getUser().getLastName() : "") : null);
         response.setUserEmail(provider.getUser() != null ? provider.getUser().getEmail() : null);
@@ -60,7 +61,8 @@ public abstract class ServiceProviderMapper {
     public ServiceProvider create(CreateServiceProviderRequest request) {
         if (request == null) return null;
 
-        User user = userRepository.findByUserId(request.getUserId());
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found: " + request.getUserId()));
 
         ServiceProvider provider = new ServiceProvider();
         provider.setUser(user);

@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateStatusRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateStatusRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListStatusResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewStatusResponse;
 import com.SaralSewa.SaralSewa.shared.entity.Status;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

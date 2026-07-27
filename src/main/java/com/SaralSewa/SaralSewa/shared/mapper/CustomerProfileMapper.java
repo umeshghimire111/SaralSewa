@@ -1,9 +1,9 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewCustomerProfileResponse;
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateCustomerProfileRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateCustomerProfileRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListCustomerProfileResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewCustomerProfileResponse;
 import com.SaralSewa.SaralSewa.shared.entity.CustomerProfiles;
 import com.SaralSewa.SaralSewa.shared.entity.User;
 import com.SaralSewa.SaralSewa.shared.repository.UserRepository;
@@ -26,7 +26,7 @@ public abstract class CustomerProfileMapper {
         if (profile == null) return null;
 
         ViewCustomerProfileResponse response = new ViewCustomerProfileResponse();
-        response.setUserId(Long.valueOf(profile.getUser() != null ? profile.getUser().getId() : null));
+        response.setUserId(profile.getUser() != null ? profile.getUser().getId() : null);
         response.setUserFullName(profile.getUser() != null ?
                 profile.getUser().getFirstName() + (profile.getUser().getLastName() != null ? " " + profile.getUser().getLastName() : "") : null);
         response.setUserEmail(profile.getUser() != null ? profile.getUser().getEmail() : null);
@@ -53,7 +53,8 @@ public abstract class CustomerProfileMapper {
     public CustomerProfiles create(CreateCustomerProfileRequest request) {
         if (request == null) return null;
 
-        User user = userRepository.findByUserId(request.getUserId());
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found: " + request.getUserId()));
 
         CustomerProfiles profile = new CustomerProfiles();
         profile.setUser(user);

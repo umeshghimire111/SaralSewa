@@ -1,23 +1,29 @@
 package com.SaralSewa.SaralSewa.shared.repository;
 
-import com.SaralSewa.SaralSewa.shared.entity.Booking;
+import com.SaralSewa.SaralSewa.shared.entity.BookingStatus;
 import com.SaralSewa.SaralSewa.shared.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface BookingStatusRepository extends JpaRepository<Booking, Integer> {
+public interface BookingStatusRepository extends JpaRepository<BookingStatus, Integer> {
 
-   Status findByCode(String code);
-
-    Optional<Booking>  findByCodeAndIsDeletedFalse(String code);
+    Status findByCode(String code);
 
     boolean existsByCode(String code);
 
-    List<Booking> findByIsActiveTrue();
+    List<BookingStatus> findByIsActiveTrue();
 
-    List<Booking> findByIsActiveTrueAndIsDeletedFalse();
+    List<BookingStatus> findByIsActiveTrueAndIsDeletedFalse();
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE BookingStatus bs SET bs.isDeleted = true WHERE bs.id = :id")
+    void softDeleteById(@Param("id") Integer id);
 }

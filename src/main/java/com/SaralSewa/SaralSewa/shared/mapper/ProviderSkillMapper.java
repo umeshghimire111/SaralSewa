@@ -1,9 +1,9 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewProviderSkillResponse;
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateProviderSkillRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateProviderSkillRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListProviderSkillResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewProviderSkillResponse;
 import com.SaralSewa.SaralSewa.shared.entity.ProviderSkill;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceProvider;
 import com.SaralSewa.SaralSewa.shared.repository.ServiceProviderRepository;
@@ -26,7 +26,7 @@ public abstract class ProviderSkillMapper {
         if (skill == null) return null;
 
         ViewProviderSkillResponse response = new ViewProviderSkillResponse();
-        response.setProviderId(Long.valueOf(skill.getProvider() != null ? skill.getProvider().getId() : null));
+        response.setProviderId(skill.getProvider() != null ? skill.getProvider().getId() : null);
         response.setProviderName(skill.getProvider() != null ? skill.getProvider().getProfession() : null);
         response.setProviderProfession(skill.getProvider() != null ? skill.getProvider().getProfession() : null);
         response.setSkillName(skill.getSkillName());
@@ -48,7 +48,8 @@ public abstract class ProviderSkillMapper {
     public ProviderSkill create(CreateProviderSkillRequest request) {
         if (request == null) return null;
 
-        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId());
+        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId())
+                .orElseThrow(() -> new RuntimeException("Provider not found: " + request.getProviderId()));
 
         ProviderSkill skill = new ProviderSkill();
         skill.setProvider(provider);

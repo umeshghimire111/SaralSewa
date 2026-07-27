@@ -3,8 +3,8 @@ package com.SaralSewa.SaralSewa.shared.core.security;
 
 
 
-import com.SaralSewa.SaralSewa.shared.repository.UserTokenRepository;
 import com.SaralSewa.SaralSewa.shared.entity.User;
+import com.SaralSewa.SaralSewa.shared.repository.impl.UserTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

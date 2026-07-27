@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateServiceCategoryRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateServiceCategoryRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListServiceCategoryResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewServiceCategoryResponse;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceCategory;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateServiceRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateServiceRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListServiceResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewServiceResponse;
 import com.SaralSewa.SaralSewa.shared.entity.Service;
 import com.SaralSewa.SaralSewa.shared.entity.ServiceCategory;
 import com.SaralSewa.SaralSewa.shared.repository.ServiceCategoryRepository;
@@ -29,7 +30,7 @@ public abstract class ServiceMapper {
         response.setName(service.getName());
         response.setCode(service.getCode());
         response.setDescription(service.getDescription());
-        response.setCategoryId(Long.valueOf(service.getCategory() != null ? service.getCategory().getId() : null));
+        response.setCategoryId((service.getCategory() != null ? service.getCategory().getId() : null));
         response.setCategoryName(service.getCategory() != null ? service.getCategory().getName() : null);
         response.setCategoryCode(service.getCategory() != null ? service.getCategory().getCode() : null);
         response.setEstimatedDuration(service.getEstimatedDuration());

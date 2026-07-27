@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateRoleRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateRoleRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListRoleResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewRoleResponse;
 import com.SaralSewa.SaralSewa.shared.entity.Role;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

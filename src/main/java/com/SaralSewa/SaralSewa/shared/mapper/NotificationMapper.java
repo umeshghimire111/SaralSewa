@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateNotificationRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateNotificationRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListNotificationResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewNotificationResponse;
 import com.SaralSewa.SaralSewa.shared.entity.Notification;
 import com.SaralSewa.SaralSewa.shared.entity.User;
 import com.SaralSewa.SaralSewa.shared.repository.UserRepository;
@@ -26,7 +27,7 @@ public abstract class NotificationMapper {
         if (notification == null) return null;
 
         ViewNotificationResponse response = new ViewNotificationResponse();
-        response.setUserId(Long.valueOf(notification.getUser() != null ? notification.getUser().getId() : null));
+        response.setUserId((notification.getUser() != null ? notification.getUser().getId() : null));
         response.setUserName(notification.getUser() != null ?
                 notification.getUser().getFirstName() + (notification.getUser().getLastName() != null ? " " + notification.getUser().getLastName() : "") : null);
         response.setUserEmail(notification.getUser() != null ? notification.getUser().getEmail() : null);
@@ -51,7 +52,8 @@ public abstract class NotificationMapper {
     public Notification create(CreateNotificationRequest request) {
         if (request == null) return null;
 
-        User user = userRepository.findByUserId(request.getUserId());
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("User not found: " + request.getUserId()));
 
         Notification notification = new Notification();
         notification.setUser(user);

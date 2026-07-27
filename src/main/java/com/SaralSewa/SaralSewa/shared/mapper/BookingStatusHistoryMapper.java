@@ -1,7 +1,7 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
-import com.SaralSewa.SaralSewa.shared.dto.response.BookingStatusHistoryResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewBookingStatusHistoryResponse;
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.entity.BookingStatusHistory;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
@@ -17,7 +17,7 @@ public abstract class BookingStatusHistoryMapper {
         if (history == null) return null;
 
         ViewBookingStatusHistoryResponse response = new ViewBookingStatusHistoryResponse();
-        response.setBookingId(Long.valueOf(history.getBooking() != null ? history.getBooking().getId() : null));
+        response.setBookingId((history.getBooking() != null ? history.getBooking().getId() : null));
         response.setBookingCode(history.getBooking() != null ? history.getBooking().getBookingCode() : null);
         response.setOldStatusName(history.getOldStatus() != null ? history.getOldStatus().getName() : null);
         response.setOldStatusCode(history.getOldStatus() != null ? history.getOldStatus().getCode() : null);
@@ -30,9 +30,9 @@ public abstract class BookingStatusHistoryMapper {
         return response;
     }
 
-    public abstract BookingStatusHistoryResponse entityToResponse(BookingStatusHistory history);
+    public abstract BookingStatusHistory entityToResponse(BookingStatusHistory history);
 
-    public List<BookingStatusHistoryResponse> listHistories(List<BookingStatusHistory> histories) {
+    public List<BookingStatusHistory> listHistories(List<BookingStatusHistory> histories) {
         if (histories == null) return null;
         return histories.stream().map(this::entityToResponse).collect(Collectors.toList());
     }

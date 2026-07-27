@@ -1,10 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewBookingResponse;
 import com.SaralSewa.SaralSewa.shared.constant.BookingStatusConstant;
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateBookingRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateBookingRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListBookingResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewBookingResponse;
 import com.SaralSewa.SaralSewa.shared.entity.*;
 import com.SaralSewa.SaralSewa.shared.repository.*;
 import org.mapstruct.Mapper;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
@@ -37,15 +36,15 @@ public abstract class BookingMapper {
 
         ViewBookingResponse response = new ViewBookingResponse();
         response.setBookingCode(booking.getBookingCode());
-        response.setCustomerId(Long.valueOf(booking.getCustomer() != null ? booking.getCustomer().getId() : null));
+        response.setCustomerId(booking.getCustomer() != null ? booking.getCustomer().getId() : null);
         response.setCustomerName(booking.getCustomer() != null ?
                 booking.getCustomer().getFirstName() + (booking.getCustomer().getLastName() != null ? " " + booking.getCustomer().getLastName() : "") : null);
         response.setCustomerEmail(booking.getCustomer() != null ? booking.getCustomer().getEmail() : null);
         response.setCustomerPhone(booking.getCustomer() != null ? booking.getCustomer().getPhone() : null);
-        response.setProviderId(Long.valueOf(booking.getProvider() != null ? booking.getProvider().getId() : null));
+        response.setProviderId(booking.getProvider() != null ? booking.getProvider().getId() : null);
         response.setProviderName(booking.getProvider() != null ? booking.getProvider().getProfession() : null);
         response.setProviderProfession(booking.getProvider() != null ? booking.getProvider().getProfession() : null);
-        response.setSlotId(Long.valueOf(booking.getSlot() != null ? booking.getSlot().getId() : null));
+        response.setSlotId(booking.getSlot() != null ? booking.getSlot().getId() : null);
         response.setSlotDateTime(booking.getSlot() != null ?
                 booking.getSlot().getAvailableDate() + " " + booking.getSlot().getStartTime() : null);
         response.setServiceDescription(booking.getServiceDescription());
@@ -70,8 +69,10 @@ public abstract class BookingMapper {
     public Booking create(CreateBookingRequest request) {
         if (request == null) return null;
 
-        User customer = userRepository.findByUserId(request.getCustomerId());
-        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId());
+        User customer = userRepository.findById(request.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found: " + request.getCustomerId()));
+        ServiceProvider provider = serviceProviderRepository.findByUserId(request.getProviderId())
+                .orElseThrow(() -> new RuntimeException("Provider not found: " + request.getProviderId()));
         AvailabilitySlot slot = availabilitySlotRepository.findById(request.getSlotId()).orElse(null);
 
         Booking booking = new Booking();

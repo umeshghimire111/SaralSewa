@@ -1,9 +1,10 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateBookingStatusRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateBookingStatusRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListBookingStatusResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewBookingStatusResponse;
 import com.SaralSewa.SaralSewa.shared.entity.BookingStatus;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

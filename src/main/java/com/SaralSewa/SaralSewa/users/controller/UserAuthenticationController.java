@@ -4,7 +4,7 @@ package com.SaralSewa.SaralSewa.users.controller;
 import com.SaralSewa.SaralSewa.shared.core.config.constant.ApiConstant;
 import com.SaralSewa.SaralSewa.shared.core.controller.BaseController;
 import com.SaralSewa.SaralSewa.shared.core.dto.response.ApiResponse;
-import com.SaralSewa.SaralSewa.shared.dto.request.AuthenticateUserRequest;
+import com.SaralSewa.SaralSewa.shared.dto.request.action.AuthenticateUserRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.UserAuthenticationResponse;
 import com.SaralSewa.SaralSewa.shared.service.UserAuthenticationService;
 import jakarta.servlet.http.HttpServletRequest;

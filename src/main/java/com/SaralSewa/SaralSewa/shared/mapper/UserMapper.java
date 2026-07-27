@@ -1,11 +1,12 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
+
 import com.SaralSewa.SaralSewa.shared.constant.RoleConstant;
 import com.SaralSewa.SaralSewa.shared.constant.StatusConstant;
 import com.SaralSewa.SaralSewa.shared.dto.request.create.CreateUserRequest;
 import com.SaralSewa.SaralSewa.shared.dto.request.update.UpdateUserRequest;
 import com.SaralSewa.SaralSewa.shared.dto.response.list.ListUserResponse;
-import com.SaralSewa.SaralSewa.shared.dto.response.view.ViewUserResponse;
 import com.SaralSewa.SaralSewa.shared.entity.Role;
 import com.SaralSewa.SaralSewa.shared.entity.Status;
 import com.SaralSewa.SaralSewa.shared.entity.User;
