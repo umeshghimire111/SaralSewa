@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class UpdateNotificationRequest extends ModelBase {
 
+    private Integer notificationId;
+
     @Size(min = 2, max = 150, message = "Title must be between 2 and 150 characters")
     private String title;
 

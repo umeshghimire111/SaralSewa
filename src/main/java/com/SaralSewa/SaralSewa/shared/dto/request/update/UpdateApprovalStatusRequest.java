@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateApprovalStatusRequest extends ModelBase {
-
+    private Integer ApprovalStatusId;
     @Size(min = 2, max = 50, message = "Status name must be between 2 and 50 characters")
     private String name;
 

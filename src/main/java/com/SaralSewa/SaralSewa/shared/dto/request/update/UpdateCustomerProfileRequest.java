@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class UpdateCustomerProfileRequest extends ModelBase {
 
+    private Integer profileId;
+
     @Size(max = 255, message = "Address must be less than 255 characters")
     private String address;
 

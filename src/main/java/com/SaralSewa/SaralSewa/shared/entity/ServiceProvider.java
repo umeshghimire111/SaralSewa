@@ -31,6 +31,9 @@ public class ServiceProvider extends BaseEntity {
     @Column(name = "average_rating", precision = 10, scale = 2)
     private BigDecimal averageRating;
 
+    @Column(name = "total_reviews")
+    private Integer totalReviews;
+
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 

@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 @Setter
 public class UpdateServiceRequest extends ModelBase {
 
+    private Integer serviceId;
+
     @Size(min = 2, max = 150, message = "Service name must be between 2 and 150 characters")
     private String name;
 

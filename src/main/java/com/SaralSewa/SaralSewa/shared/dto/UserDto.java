@@ -51,7 +51,4 @@ public class UserDto {
     @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
 
-    public boolean isPasswordMatch() {
-        return password != null && password.equals(confirmPassword);
-    }
 }

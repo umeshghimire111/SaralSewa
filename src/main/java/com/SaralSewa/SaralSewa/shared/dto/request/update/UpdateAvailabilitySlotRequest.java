@@ -14,7 +14,7 @@ public class UpdateAvailabilitySlotRequest extends ModelBase {
 
     @Future(message = "Available date must be in the future")
     private LocalDate availableDate;
-
+  private Integer SlotId;
     private LocalTime startTime;
 
     private LocalTime endTime;

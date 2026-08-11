@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 public class UpdateUserRequest extends ModelBase {
 
+    private Integer userId;
+
     @Size(min = 2, max = 100, message = "First name must be between 2 and 100 characters")
     private String firstName;
 

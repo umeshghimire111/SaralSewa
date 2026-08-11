@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 public class UpdateProviderDocumentRequest extends ModelBase {
 
+    private Integer documentId;
+
     @Size(max = 100, message = "Document name must be less than 100 characters")
     private String documentName;
 

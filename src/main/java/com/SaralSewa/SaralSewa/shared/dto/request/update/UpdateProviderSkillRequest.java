@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class UpdateProviderSkillRequest extends ModelBase {
 
+    private Integer skillId;
+
     @Size(min = 2, max = 100, message = "Skill name must be between 2 and 100 characters")
     private String skillName;
 

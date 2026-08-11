@@ -5,7 +5,7 @@ import com.SaralSewa.SaralSewa.shared.core.config.constant.ApiConstant;
 import com.SaralSewa.SaralSewa.shared.core.controller.BaseController;
 import com.SaralSewa.SaralSewa.shared.core.dto.response.ApiResponse;
 import com.SaralSewa.SaralSewa.shared.dto.UserDto;
-import com.SaralSewa.SaralSewa.shared.repository.service.UserService;
+import com.SaralSewa.SaralSewa.shared.service.UserAuthenticationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 public class UserController extends BaseController {
-    private final UserService userService;
+    private final UserAuthenticationService userAuthenticationService;
 
     @PostMapping(ApiConstant.REGISTER)
     public ApiResponse<?> register(@RequestBody @Valid UserDto userDto) {
 
-        return userService.register(userDto);
+        return userAuthenticationService.register(userDto);
 
     }
 }

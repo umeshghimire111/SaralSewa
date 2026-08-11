@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class UpdateServiceCategoryRequest extends ModelBase {
 
+    private Integer categoryId;
+
     @Size(min = 2, max = 100, message = "Category name must be between 2 and 100 characters")
     private String name;
 

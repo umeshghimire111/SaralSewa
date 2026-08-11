@@ -6,12 +6,15 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum StatusConstant {
+
     ACTIVE("ACTIVE"),
-    INACTIVE("INACTIVE"),
+    DELETED("DELETED"),
     PENDING("PENDING"),
-    SUSPENDED("SUSPENDED"),
-    IS_ACTIVE("isActive"),
-    IS_DELETED("isDeleted");
+    BLOCKED("BLOCKED"),
+    CONFIRMED("CONFIRMED"),
+    CANCELLED("CANCELLED"),
+    COMPLETED("COMPLETED");
+
 
     private final String name;
 }

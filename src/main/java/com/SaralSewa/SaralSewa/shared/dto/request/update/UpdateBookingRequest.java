@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @Setter
 public class UpdateBookingRequest extends ModelBase {
 
+    private Integer bookingId;
+
     private Integer slotId;
 
     @Future(message = "Booking date must be in the future")

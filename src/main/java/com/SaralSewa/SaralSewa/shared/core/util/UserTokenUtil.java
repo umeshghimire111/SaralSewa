@@ -2,7 +2,7 @@ package com.SaralSewa.SaralSewa.shared.core.util;
 
 import com.SaralSewa.SaralSewa.shared.entity.User;
 import com.SaralSewa.SaralSewa.shared.entity.UserToken;
-import com.SaralSewa.SaralSewa.shared.repository.impl.UserTokenRepository;
+import com.SaralSewa.SaralSewa.shared.repository.UserTokenRepository;
 import org.jspecify.annotations.NonNull;
 import java.util.Optional;
 import java.util.function.Function;

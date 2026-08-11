@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class DeleteCustomerProfileRequest extends ModelBase {
 
-    @NotNull(message = "Customer Profile ID is required")
-    private Integer customerProfileId;
+    @NotNull(message = "Profile ID is required")
+    private Integer profileId;
 }

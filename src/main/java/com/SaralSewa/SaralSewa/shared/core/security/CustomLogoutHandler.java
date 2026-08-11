@@ -5,7 +5,7 @@ package com.SaralSewa.SaralSewa.shared.core.security;
 import com.SaralSewa.SaralSewa.shared.core.dto.response.ApiResponse;
 import com.SaralSewa.SaralSewa.shared.core.dto.response.ResponseUtil;
 import com.SaralSewa.SaralSewa.shared.entity.UserToken;
-import com.SaralSewa.SaralSewa.shared.repository.impl.UserTokenRepository;
+import com.SaralSewa.SaralSewa.shared.repository.UserTokenRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

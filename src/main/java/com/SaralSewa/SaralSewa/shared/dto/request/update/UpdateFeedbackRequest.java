@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class UpdateFeedbackRequest extends ModelBase {
 
+    private Integer feedbackId;
+
     @Size(min = 2, max = 150, message = "Subject must be between 2 and 150 characters")
     private String subject;
 

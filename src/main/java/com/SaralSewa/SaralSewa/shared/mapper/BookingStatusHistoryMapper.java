@@ -1,5 +1,6 @@
 package com.SaralSewa.SaralSewa.shared.mapper;
 
+import com.SaralSewa.SaralSewa.shared.dto.response.list.ListBookingStatusHistoryResponse;
 import com.SaralSewa.SaralSewa.shared.dto.response.view.*;
 
 import com.SaralSewa.SaralSewa.shared.entity.BookingStatusHistory;
@@ -30,9 +31,9 @@ public abstract class BookingStatusHistoryMapper {
         return response;
     }
 
-    public abstract BookingStatusHistory entityToResponse(BookingStatusHistory history);
+    public abstract ListBookingStatusHistoryResponse entityToResponse(BookingStatusHistory history);
 
-    public List<BookingStatusHistory> listHistories(List<BookingStatusHistory> histories) {
+    public List<ListBookingStatusHistoryResponse> listHistories(List<BookingStatusHistory> histories) {
         if (histories == null) return null;
         return histories.stream().map(this::entityToResponse).collect(Collectors.toList());
     }

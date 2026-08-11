@@ -29,7 +29,7 @@ public abstract class BookingMapper {
     private AvailabilitySlotRepository availabilitySlotRepository;
 
     @Autowired
-    private BookingStatusRepository bookingStatusRepository;
+    private StatusRepository statusRepository;
 
     public ViewBookingResponse viewDetails(Booking booking) {
         if (booking == null) return null;
@@ -84,7 +84,7 @@ public abstract class BookingMapper {
         booking.setCustomerAddress(request.getCustomerAddress());
         booking.setTotalAmount(request.getTotalAmount());
 
-        Status defaultStatus = bookingStatusRepository.findByCode(BookingStatusConstant.PENDING.getName());
+        Status defaultStatus = statusRepository.findByCode(BookingStatusConstant.PENDING.getName());
         booking.setBookingStatus(defaultStatus);
 
         booking.setIsActive(true);
@@ -112,7 +112,7 @@ public abstract class BookingMapper {
             booking.setTotalAmount(request.getTotalAmount());
         }
         if (request.getBookingStatusCode() != null) {
-            Status status = bookingStatusRepository.findByCode(request.getBookingStatusCode());
+            Status status = statusRepository.findByCode(request.getBookingStatusCode());
             booking.setBookingStatus(status);
         }
         booking.setUpdatedAt(LocalDateTime.now());
@@ -121,7 +121,7 @@ public abstract class BookingMapper {
 
     public Booking updateStatus(Booking booking, String statusCode) {
         if (booking == null || statusCode == null) return booking;
-        Status status = bookingStatusRepository.findByCode(statusCode);
+        Status status = statusRepository.findByCode(statusCode);
         booking.setBookingStatus(status);
         booking.setUpdatedAt(LocalDateTime.now());
         return booking;
@@ -129,7 +129,7 @@ public abstract class BookingMapper {
 
     public Booking cancel(Booking booking) {
         if (booking == null) return booking;
-        Status cancelledStatus = bookingStatusRepository.findByCode(BookingStatusConstant.CANCELLED.getName());
+        Status cancelledStatus = statusRepository.findByCode(BookingStatusConstant.CANCELLED.getName());
         booking.setBookingStatus(cancelledStatus);
         booking.setUpdatedAt(LocalDateTime.now());
         return booking;
@@ -137,7 +137,7 @@ public abstract class BookingMapper {
 
     public Booking complete(Booking booking) {
         if (booking == null) return booking;
-        Status completedStatus = bookingStatusRepository.findByCode(BookingStatusConstant.COMPLETED.getName());
+        Status completedStatus = statusRepository.findByCode(BookingStatusConstant.COMPLETED.getName());
         booking.setBookingStatus(completedStatus);
         booking.setUpdatedAt(LocalDateTime.now());
         return booking;

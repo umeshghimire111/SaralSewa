@@ -1,7 +1,6 @@
 package com.SaralSewa.SaralSewa.shared.repository;
 
 import com.SaralSewa.SaralSewa.shared.entity.BookingStatus;
-import com.SaralSewa.SaralSewa.shared.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +13,7 @@ import java.util.List;
 @Repository
 public interface BookingStatusRepository extends JpaRepository<BookingStatus, Integer> {
 
-    Status findByCode(String code);
+    BookingStatus findByCode(String code);
 
     boolean existsByCode(String code);
 

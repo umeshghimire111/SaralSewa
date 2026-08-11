@@ -2,7 +2,11 @@ package com.SaralSewa.SaralSewa.shared.repository;
 
 import com.SaralSewa.SaralSewa.shared.entity.ServiceCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,4 +24,9 @@ public interface ServiceCategoryRepository extends JpaRepository<ServiceCategory
     List<ServiceCategory> findByIsActiveTrue();
 
     List<ServiceCategory> findByIsActiveTrueAndIsDeletedFalse();
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE ServiceCategory c SET c.isDeleted = true, c.deletedAt = CURRENT_TIMESTAMP WHERE c.id = :id")
+    void softDeleteById(@Param("id") Integer id);
 }
