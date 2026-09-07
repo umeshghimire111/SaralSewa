@@ -18,14 +18,17 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
 
-freemarker:
-  enabled: false
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    check-template-location: true
 
 server:
   port: 8082
 
 jwt:
-  secret: DDFBMSDKcdvmm24302SMDVMFE24DGTIHI240RGKMOFRTHKORG$B*/9%$**@==+=
+  secret: DDFBMSDKcdvPm24302SMDVMFE24DGTIHI240RGKMOFRTHKORG$B*/9%$**@==+=
 
 logging:
   pattern:
@@ -36,7 +39,6 @@ logging:
     org.hibernate: ERROR
     tomcat: WARN
 
-    spring:
   servlet:
     multipart:
       max-file-size: 10MB

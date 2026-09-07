@@ -50,6 +50,9 @@ public class User extends BaseEntity {
     @Column(name = "wrong_password_attempt_count")
     private Integer wrongPasswordAttemptCount = 0;
 
+    @Column(name = "account_locked_until")
+    private LocalDateTime accountLockedUntil;
+
     @Column(name="is_active", nullable=false)
     private Boolean isActive;
 
@@ -73,5 +76,4 @@ public class User extends BaseEntity {
 
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
-
 }
